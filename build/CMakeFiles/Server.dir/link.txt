@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/Server.dir/src/main.cpp.o CMakeFiles/Server.dir/src/is_error.cpp.o CMakeFiles/Server.dir/src/CreateTcpSocket.cpp.o CMakeFiles/Server.dir/src/HttpMes.cpp.o CMakeFiles/Server.dir/src/HttpResolution.cpp.o -o Server 
