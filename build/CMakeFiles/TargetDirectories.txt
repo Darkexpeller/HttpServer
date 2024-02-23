@@ -1,3 +1,0 @@
-/home/swordland/projects/Server/build/CMakeFiles/rebuild_cache.dir
-/home/swordland/projects/Server/build/CMakeFiles/edit_cache.dir
-/home/swordland/projects/Server/build/CMakeFiles/Server.dir
