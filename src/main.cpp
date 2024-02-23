@@ -44,6 +44,6 @@ int main()
 	cout<<value<<endl;
 	cout << "length of value is" << value.length() << endl;
 	shutdown(sockfd, SHUT_WR);//立即并同时关闭sockfd上的读和写
-	//close(sockfd);//引用计数-1
+	//close(sockfd);//引用数-1
 	return 1;
 }
