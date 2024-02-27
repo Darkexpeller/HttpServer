@@ -9,7 +9,15 @@
 #include<type_traits>
 namespace HttpHandle
 {
-    
+    struct Url
+    {
+        std::string Scheme;
+        std::string DomainName;
+        std::string Port;
+        std::string Path;
+        std::string Parm;
+        std::string Anchor;
+    };
     class HttpMes // To parse Http message
     {
     public:
@@ -20,14 +28,18 @@ namespace HttpHandle
         std::string GetHeadersValue(std::string key = "");
         const char *GetMes();
         bool IsHttpMessage();
+        int HttpParseURL(Url &content);
     private:
         std::string message;
         int socket_fd;
         bool is_http;
         std::vector<std::string> Header;
         std::string content;
+        bool IsHaveParsedURL = 0;
+        HttpHandle::Url URLstruct;
     };
     int HttpSend(std::string mes, int _FD);
-    int HttpGetResource(HttpMes &mes,std::string &content);//
+    //int HttpParseURL(HttpMes &mes,Url &content);//
+
 };
 #endif

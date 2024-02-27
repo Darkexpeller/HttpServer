@@ -37,12 +37,27 @@ int main()
 	cout << "seocnd= " <<(double) (finish - start) / CLOCKS_PER_SEC << "s " << endl;
 	HttpHandle::HttpMes http(buffer, sockfd);
 	std::string value = http.GetHeadersValue("Host");
-	cout << "URL=" << http.GetHeadersValue("Url")<<endl;
+	cout << "URL=" << http.GetHeadersValue("URL")<<endl;
 	cout << "RequestType=" << http.GetHeadersValue("RequestType")<<endl;
 	cout << "ProtocolType=" << http.GetHeadersValue("ProtocolType")<<endl;
 	cout << "ProtocolVersion=" << http.GetHeadersValue("ProtocolVersion")<<endl;
+
 	cout<<value<<endl;
 	cout << "length of value is" << value.length() << endl;
+	HttpHandle::Url urls;
+	try
+	{
+		http.HttpParseURL(urls);
+	}
+	catch(const std::exception& e)
+	{
+		cout << "xieyi=" << urls.Scheme << endl;
+		cout << "Domain=" << urls.DomainName << endl;
+		std::cerr << e.what() << '\n';
+	}
+	
+	cout << "xieyi=" << urls.Scheme << endl;
+	cout << "Domain=" << urls.DomainName << endl;
 	shutdown(sockfd, SHUT_WR);//立即并同时关闭sockfd上的读和写
 	//close(sockfd);//引用数-1
 	return 1;
