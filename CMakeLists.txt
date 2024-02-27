@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 
 
 project(Server)
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 11)
 set(PROJECT_SOURCE
 
     ./src/main.cpp
@@ -14,12 +14,17 @@ set(PROJECT_SOURCE
     ./src/CreateTcpSocket.h
     
 
-    ./src/HttpMes.h
-    ./src/HttpMes.cpp
+    # ./src/HttpMes.h
+    # ./src/HttpMes.cpp
 
+    # ./src/HttpResolution.cpp
+    # ./src/HttpResolution.h
+
+    ./src/HttpHandle.h 
+    ./src/HttpHandle.cpp
+
+    ./src/HttpResolution.h 
     ./src/HttpResolution.cpp
-    ./src/HttpResolution.h
-
 )
 add_executable(Server ${PROJECT_SOURCE})
 ####11111545
