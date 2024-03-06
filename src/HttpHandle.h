@@ -22,13 +22,15 @@ namespace HttpHandle
     {
     public:
         HttpMes(std::string mes, int _FD);
-        void HttpParseHeader();
+        void HttpParseHeader(); 
         void Extractcontent(std::string::iterator it);
         std::map<std::string,std:: string> HttpMap; //::iterator it->first,second.....
         std::string GetHeadersValue(std::string key = "");
         const char *GetMes();
         bool IsHttpMessage();
         int HttpParseURL(Url &content);
+        int GetPort();
+        const char *GetHostName(); // there is no port Parm
     private:
         std::string message;
         int socket_fd;
@@ -37,8 +39,9 @@ namespace HttpHandle
         std::string content;
         bool IsHaveParsedURL = 0;
         HttpHandle::Url URLstruct;
+        
     };
-    int HttpSend(std::string mes, int _FD);
+    int HttpSend(std::string mes,std::string *pRecv=NULL, int _FD=-1);
     //int HttpParseURL(HttpMes &mes,Url &content);//
 
 };

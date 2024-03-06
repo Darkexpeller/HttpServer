@@ -25,6 +25,8 @@ set(PROJECT_SOURCE
 
     ./src/HttpResolution.h 
     ./src/HttpResolution.cpp
+
+    ./src/config.h
 )
 add_executable(Server ${PROJECT_SOURCE})
 ####11111545
