@@ -6,6 +6,9 @@
 #include <arpa/inet.h>
 using namespace std;
 
+
+
+
 int HttpStreamRead(string &content, int _FD = -1)
 {
     if (-1 == _FD)
@@ -25,8 +28,19 @@ int HttpStreamRead(string &content, int _FD = -1)
             ++ReadCount;
             if (recvstream == '\n' && *(content.end() - 3) == '\n')
             {
-                return content.length();
-            }
+                size_t pos = content.find("Content-Length");
+                if(pos!=content.npos)
+                {
+                    string length;
+                    for (int i = pos + 15; content[i] != '\r'; i++)
+                        length += content[i];
+                    return std::stoi(length);
+                }
+                else
+                {
+                    return 0;
+                }
+                        }
             recvstream = 0;
         }
     }
@@ -36,7 +50,7 @@ int HttpStreamRead(string &content, int _FD = -1)
 int HttpHandle::HttpSend(std::string mes, std::string *pRecv, int _FD)
 {
 
-    if ("" == mes)
+    if ("" == mes && NULL==pRecv)
     {
         return 0;
     }
@@ -154,10 +168,15 @@ int HttpHandle::HttpSend(std::string mes, std::string *pRecv, int _FD)
                         send(sockfd, mes.c_str(), mes.size(), 0);
                         std::cout << "SEND !!!\n";
                     }
-                    char buffer[1024];
-                    recv(sockfd, buffer, sizeof(buffer), 0);
-                    *pRecv += buffer;
-
+                    
+                    int ContentLength = HttpStreamRead(*pRecv, sockfd);
+                    std::cout << "begin recv contetn\n";
+                    std::cout << "Content= " << ContentLength << std::endl;
+                    char *ContentBuffer = new char[ContentLength];
+                    memset(ContentBuffer, 0, ContentLength);
+                    recv(sockfd, ContentBuffer, ContentLength, 0);
+                    *pRecv += ContentBuffer;
+                    
                     // return 0;
                 }
             }
