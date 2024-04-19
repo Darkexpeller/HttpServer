@@ -21,7 +21,7 @@ int HttpStreamRead(string &content, int _FD = -1)
     {
         char recvstream = 0;
         int ReadCount = 0;
-        while (ReadCount <= 2048)
+        while (ReadCount <= 2048) //To 
         {
             recv(_FD, &recvstream, sizeof(recvstream), 0);
             content += recvstream;
@@ -47,7 +47,7 @@ int HttpStreamRead(string &content, int _FD = -1)
     return -1;
 }
 
-int HttpHandle::HttpSend(std::string mes, std::string *pRecv, int _FD)
+int HttpHandle::HttpSend(std::string mes, std::string *pRecv, int _FD) 
 {
 
     if ("" == mes && NULL==pRecv)

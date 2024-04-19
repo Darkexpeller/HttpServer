@@ -1,11 +1,14 @@
 #include"CreateTcpSocket.h"
 #include"is_error.h"
 #include<errno.h>
+#include"outputlog.h"
+#include<string>
 SOCKET_FILE_D CreateServerTcpSocket(int in_port)
 {
 	int sockfd = socket(AF_INET, SOCK_STREAM,0);
 	is_error(sockfd==-1,"socket is fail");
-
+	int reuse = 1;
+	setsockopt(sockfd, SOL_SOCKET, SO_REUSEADDR, &reuse, sizeof(reuse));
 	struct sockaddr_in serv_addr;
 	bzero(&serv_addr, sizeof(serv_addr));
 	serv_addr.sin_family = AF_INET;
@@ -27,5 +30,6 @@ SOCKET_FILE_D CreateServerTcpSocket(int in_port)
 	// 	 break;
 	// }
 	listen(sockfd, SOMAXCONN); // int listen(int sockfd,int backlog);
+	LogOut.LogThreadHanle(std::string("INFO - Server's socket is created.The listen port is "+std::to_string(in_port)).c_str());
 	return sockfd;
 }
